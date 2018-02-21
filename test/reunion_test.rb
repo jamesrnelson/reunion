@@ -20,6 +20,8 @@ class ReunionTest < Minitest::Test
     reunion = Reunion.new('Port Orchard')
     reunion.add_activity(name)
 
-    assert_equal 
+    assert_instance_of Hash, reunion.activities
   end
+
+  def test_
 end
