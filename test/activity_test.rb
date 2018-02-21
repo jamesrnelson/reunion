@@ -42,4 +42,25 @@ class ActivityTest < Minitest::Test
 
     assert_equal 70, activity.total_cost
   end
+
+  def test_you_can_split_the_cost
+    activity = Activity.new('Hiking')
+    activity.add_participant('Alistair', 40)
+    activity.add_participant('Owen', 28)
+    activity.add_participant('Amalfi', 31)
+
+    assert_equal 33, activity.split_cost
+  end
+
+  def test_can_figure_out_who_owes_what
+    activity = Activity.new('Hiking')
+    activity.add_participant('Alistair', 40)
+    activity.add_participant('Owen', 28)
+    activity.add_participant('Amalfi', 31)
+
+    expected = 'Alistair owes -7 dollars, Owen owes 5 dollars, Amalfi owes 2 dollars'
+    actual = activity.who_owes_what
+
+    assert_equal expected, actual
+  end
 end
