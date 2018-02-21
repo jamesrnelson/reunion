@@ -1,4 +1,5 @@
 require './lib/activity'
+require 'pry'
 
 # Defines the Reunion class
 class Reunion
@@ -7,16 +8,20 @@ class Reunion
 
   def initialize(location)
     @location = location
-    @activities = {}
+    @activities = []
+    @reunion_cost = 0
   end
 
   def add_activity(name)
-    new_activity = { name => Activity.new(name) }
-    @activities.merge!(new_activity)
+    name = Activity.new(name)
+    @activities << name
+
   end
 
-  def total__reunion_cost
-    summing_up = @activities.values
-    summing_up.map(&:total_cost).reduce(:+)
+  def total_reunion_cost
+    summing_up = @activities.map do |activity|
+      activity.total_cost
+    end
+    summing_up.reduce(:+)
   end
 end
