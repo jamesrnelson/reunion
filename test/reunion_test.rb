@@ -18,10 +18,20 @@ class ReunionTest < Minitest::Test
 
   def test_the_reunion_has_activities
     reunion = Reunion.new('Port Orchard')
-    reunion.add_activity(name)
+
+    assert_empty reunion.activities
+
+    reunion.add_activity('hiking')
+    reunion.add_activity('three-legged race')
 
     assert_instance_of Hash, reunion.activities
+    assert_equal 2, reunion.activities.length
+    assert_instance_of Activity, reunion.activities['hiking']
   end
 
-  def test_
+  def test_the_reunion_has_a_total_cost
+    reunion = Reunion.new('Port Orchard')
+
+    assert_equal 198, reunion.total_cost
+  end
 end
